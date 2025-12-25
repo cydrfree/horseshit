@@ -1,0 +1,219 @@
+@font-face {
+  font-family: "BookkGothic";
+  src: url("assets/fonts/BookkGothic-Lt.woff2") format("woff2");
+  font-weight: normal;
+  font-style: normal;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body,
+html {
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  font-family: "BookkGothic", sans-serif;
+}
+
+/* 초기 배경색 (흰색) */
+body {
+  background-color: white;
+}
+
+.container {
+  position: fixed;
+  inset: 0;
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+}
+
+/* 배경 이미지 (첫 화면용) */
+.background {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  transition: opacity 0.5s ease; /* 서서히 사라지게 */
+}
+
+.background img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  pointer-events: none;
+}
+
+/* 흐르는 텍스트 */
+.scrolling-text {
+  position: fixed;
+  left: 0;
+  width: 100%;
+  overflow: hidden;
+  z-index: 10;
+  pointer-events: none;
+}
+.scrolling-text.top {
+  top: 0;
+}
+.scrolling-text.bottom {
+  bottom: 0;
+}
+
+.scroll-content {
+  display: flex;
+  animation: scroll-left 20s linear infinite;
+}
+
+.scrolling-text p {
+  font-size: 64px;
+  color: red;
+  white-space: nowrap;
+  padding-right: 2rem;
+  line-height: normal;
+  font-style: normal;
+}
+.ornament-font {
+  font-family: "ornamentslabelsandframes", sans-serif;
+}
+
+/* === 화면 1: 시작 화면 (2026 + 버튼) === */
+.start-screen {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 100%;
+  text-align: center;
+  z-index: 20;
+  transition: opacity 0.5s ease; /* 부드럽게 사라짐 */
+}
+
+.year-2026 {
+  width: min(90vw, 1317px);
+  aspect-ratio: 1317.031 / 330;
+  margin: 0 auto 160px auto;
+  animation: glow 2s ease-in-out infinite;
+}
+.year-svg {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+.go-message-btn {
+  font-family: "BookkGothic", sans-serif !important;
+  display: inline-block;
+  border: none;
+  padding: 15px 40px;
+  background-color: rgba(255, 0, 0, 0.8);
+  color: white;
+  text-decoration: none;
+  font-size: 1.2rem;
+  border-radius: 50px;
+  transition: all 0.3s ease;
+  backdrop-filter: blur(5px);
+  cursor: pointer; /* 버튼 커서 */
+}
+.go-message-btn:hover {
+  background-color: rgb(255, 0, 0);
+  transform: scale(1.05);
+  box-shadow: 0 0 20px rgba(255, 0, 0, 0.5);
+}
+
+/* === 화면 2: 메시지 카드 (처음엔 숨김) === */
+.message-wrapper {
+  position: absolute;
+  inset: 0;
+  display: none; /* 기본 숨김 */
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+  z-index: 30;
+  opacity: 0; /* 투명도 0에서 시작 */
+  transition: opacity 1s ease;
+}
+
+.message-card {
+  padding: 40px;
+  max-width: 600px;
+  width: 100%;
+  text-align: center;
+  max-height: 80vh;
+  overflow-y: auto;
+}
+
+.message-img {
+  width: 80%;
+  max-width: 400px;
+  height: auto;
+
+  margin-bottom: 30px;
+}
+
+.message-card h1 {
+  color: #ff0000;
+  margin-bottom: 20px;
+}
+.message-card p {
+  color: #ff0000;
+  line-height: 1.8;
+  font-size: 1.1rem;
+  word-break: keep-all;
+}
+
+/* 처음으로 돌아가기 버튼 */
+.back-btn {
+  font-family: "BookkGothic", sans-serif !important;
+  background: none;
+  border: none;
+  color: #ff0000;
+  font-size: 0.9rem;
+  text-decoration: underline;
+  cursor: pointer;
+  margin-top: 30px;
+}
+
+/* 애니메이션 */
+@keyframes scroll-left {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+@keyframes glow {
+  0%,
+  100% {
+    opacity: 1;
+    filter: drop-shadow(0 0 20px rgba(255, 255, 255, 0.8));
+  }
+  50% {
+    opacity: 0.4;
+    filter: drop-shadow(0 0 40px rgba(255, 255, 255, 1));
+  }
+}
+
+@media (max-width: 768px) {
+  .scrolling-text p {
+    font-size: 32px;
+  }
+  .go-message-btn {
+    padding: 12px 30px;
+    font-size: 1rem;
+  }
+  .message-card {
+    padding: 20px;
+  }
+}
+
+@font-face {
+  font-family: "ornamentslabelsandframes";
+  src: url("assets/fonts/ornamentslabelsandframes.woff2") format("woff2");
+}
